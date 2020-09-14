@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 
 export default function SavedList(props) {
@@ -10,6 +10,7 @@ export default function SavedList(props) {
           {movie.title}
         </span>
       ))}
+
       <Link to="/" className="home-button">
         Home
       </Link>

@@ -6,6 +6,8 @@ export default function Movie(props) {
   const [movie, setMovie] = useState();
   const { ID } = useParams();
   // console.log("my params", ID);
+  // console.log("props in Movie", props.setSaved);
+  const { setSaved } = props;
 
   let id = ID;
   // Change ^^^ that line and use a hook to obtain the :id parameter from the URL
@@ -24,6 +26,7 @@ export default function Movie(props) {
     // This effect should run every time time
     // the `id` changes... How could we do this?
   }, [ID]);
+
   console.log("my movie", movie);
 
   // Uncomment this only when you have moved on to the stretch goals
@@ -53,7 +56,8 @@ export default function Movie(props) {
           </div>
         ))}
       </div>
-      <div className="save-button">Save</div>
+      {/* <div className="save-button">Save</div> */}
+      <button onClick={() => setSaved({ movie })}>Save Title</button>
     </div>
   );
 }
