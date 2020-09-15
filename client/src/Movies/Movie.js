@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import SavedList from "./SavedList";
 
 export default function Movie(props) {
   const [movie, setMovie] = useState();
@@ -27,14 +28,25 @@ export default function Movie(props) {
     // the `id` changes... How could we do this?
   }, [ID]);
 
-  console.log("my movie", movie);
+  console.log("my props", props);
 
   // Uncomment this only when you have moved on to the stretch goals
-  // const saveMovie = evt => { }
 
   if (!movie) {
     return <div>Loading movie information...</div>;
   }
+
+  console.log("movie id", movie.id);
+
+  //was trying to disclude duplicate movies, but this doesn't work
+  const saveMovie = () => {
+    if (props.saved.includes(movie.id)) {
+      console.log("already in list");
+    } else {
+      const addToSavedList = props.addToSavedList;
+      addToSavedList(movie);
+    }
+  };
 
   const { title, director, metascore, stars } = movie;
 
@@ -57,7 +69,7 @@ export default function Movie(props) {
         ))}
       </div>
       {/* <div className="save-button">Save</div> */}
-      <button onClick={() => setSaved({ movie })}>Save Title</button>
+      <button onClick={saveMovie}>Save Title</button>
     </div>
   );
 }
